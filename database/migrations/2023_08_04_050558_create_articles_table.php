@@ -15,9 +15,6 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->id('user_id');
-            $table->id('todo_id');
-            $table->id('tag_id');
             $table->string('title');
             $table->string('body');
         });

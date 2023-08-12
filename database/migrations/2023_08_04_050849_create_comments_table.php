@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->id('user_id');
-            $table->id('article_id');
             $table->string('title');
             $table->string('body');
-            $table->timestamps('created_at')->useCurrent()->nullable();
+            $table->timestamps();
         });
     }
 
