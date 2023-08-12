@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('tag_todo', function (Blueprint $table) {
             $table->id();
-            $table->id('tag_id');
-            $table->id('todo_id');
         });
     }
 

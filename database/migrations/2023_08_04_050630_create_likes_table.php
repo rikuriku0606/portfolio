@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->id('user_id');
-            $table->id('article_id');
         });
     }
 
