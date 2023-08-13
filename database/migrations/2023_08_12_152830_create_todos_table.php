@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('time_limit');
+            $table->string('to_do_suggestions');
+            $table->string('title');
+            $table->string('body');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

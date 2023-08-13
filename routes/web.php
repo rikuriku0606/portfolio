@@ -3,6 +3,12 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\TagController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +38,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/todos', [TodoController::class, 'index']);
+Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/tags', [TagController::class, 'index']);
+Route::get('/comments', [CommentController::class, 'index']); 
+Route::get('/likes', [LikeController::class, 'index']);  
