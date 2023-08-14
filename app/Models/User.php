@@ -46,4 +46,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Todo::class);  
     }
+    
+    public function articles()   
+    {
+        return $this->hasMany(Article::class);  
+    }
+    
+    public function Likes()   
+    {
+        return $this->hasMany(Like::class);  
+    }
+    
+    public function comments()   
+    {
+        return $this->hasMany(Comment::class);  
+    }
 }
