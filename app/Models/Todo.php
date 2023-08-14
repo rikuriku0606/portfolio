@@ -13,4 +13,14 @@ class Todo extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function article()   
+    {
+        return $this->hasOne(Article::class);  
+    }
+    
+    public function tag_todos()   
+    {
+        return $this->hasMany(Tag_todo::class);
+    }
 }

@@ -7,5 +7,8 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    //
+    public function index(Article $article)
+    {
+        return $article->get();
+    }
 }

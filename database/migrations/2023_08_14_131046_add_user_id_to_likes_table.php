@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('likes', function (Blueprint $table) {
-            //
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 

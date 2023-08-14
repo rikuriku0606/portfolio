@@ -41,4 +41,4 @@ Route::get('/todos', [TodoController::class, 'index']);
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/comments', [CommentController::class, 'index']); 
-Route::get('/likes', [LikeController::class, 'index']);  
+Route::get('/likes', [LikeController::class, 'index']);
