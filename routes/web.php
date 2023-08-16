@@ -21,6 +21,8 @@ use App\Http\Controllers\TagController;
 |
 */
 
+//Route::get('/todo', [TodoController::class, 'index'])->name('index_todo');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,7 +39,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/todos', [TodoController::class, 'index']);
+Route::get('/todos', [TodoController::class, 'index'])->name('index_todo');
+Route::post('/todos', [TodoController::class, 'store']);
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/comments', [CommentController::class, 'index']); 
