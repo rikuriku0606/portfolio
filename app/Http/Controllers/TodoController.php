@@ -11,8 +11,13 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::where('status', false)->get();
-      
         return view('todos.index', compact('todos'));
+        //return view('articles.create' , compact('todos'));
+    }
+    
+    public function create()
+    {
+        //
     }
     
     public function store(Request $request, Todo $todo)
@@ -26,7 +31,7 @@ class TodoController extends Controller
     
     public function show(Todo $todo)
     {
-        //
+        return view('articles.create', compact('todo'));
     }
     
     public function edit($id)
