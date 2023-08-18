@@ -21,7 +21,6 @@ use App\Http\Controllers\TagController;
 |
 */
 
-//Route::get('/todo', [TodoController::class, 'index'])->name('index_todo');
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,9 +38,26 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/todos', [TodoController::class, 'index'])->name('index_todo');
-Route::post('/todos', [TodoController::class, 'store']);
-Route::get('/articles', [ArticleController::class, 'index']);
-Route::get('/tags', [TagController::class, 'index']);
-Route::get('/comments', [CommentController::class, 'index']); 
-Route::get('/likes', [LikeController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('todos', TodoController::class);
+    Route::get('/todos', [TodoController::class, 'index'])->name('index_todo');
+    Route::post('/todos/{todo}', [TodoController::class, 'store']);
+    Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
+    Route::put('/todos/{todo}/update', [TodoController::class, 'update']);
+    Route::delete('/todos/{todo}', [TodoController::class, 'destroy']);
+});
+
+Route::get('/todos/create', [TodoController::class, 'create']);
+Route::get('/todos/{todo}', [TodoController::class, 'show'])->name('show_todo');
+/*Route::get('/todos', [TodoController::class, 'index'])->name('index_todo');
+Route::post('/todos/{todo}', [TodoController::class, 'store']);
+Route::get('/todos/{todo}', [TodoController::class, 'show'])->name('show_todo');
+Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
+Route::put('/todos/{todos}', [TodoController::class, 'update']);
+Route::delete('/todos/{todo}', [TodoController::class, 'destroy']);*/
+
+//Route::get('/todos/{todo}/edit', 'TodoController@edit')->name('todos.edit');
+//Route::get('/articles', [ArticleController::class, 'index']);
+//Route::get('/tags', [TagController::class, 'index']);
+//Route::get('/comments', [CommentController::class, 'index']); 
+//Route::get('/likes', [LikeController::class, 'index']);

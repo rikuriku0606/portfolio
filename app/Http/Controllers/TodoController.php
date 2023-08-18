@@ -3,39 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 
 class TodoController extends Controller
 {
-    public function index(Todo $todo)
+    public function index()
     {
-        $todos = Todo::all();
-  
-        return view('todos.index')->with(['todos' => $todo->get()]);
+        $todos = Todo::where('status', false)->get();
+      
+        return view('todos.index', compact('todos'));
     }
     
     public function store(Request $request, Todo $todo)
     {
-        
+        $todo = new Todo;
         $input = $request['todo'];
         $input += ['user_id' => $request->user()->id];  
         $todo->fill($input)->save();
-        return redirect('/todos/' . $todo->id);
-        
-        /*$todo_name = $request->input('todo_name');
-        dd($todo_name);*/
+        return redirect('/todos/');
     }
     
     public function show(Todo $todo)
     {
-        //return view('todos.show')->with(['todo' => $todo]);
+        //
     }
     
-    public function update(TodoRequest $request, Todo $todo)
-{
-    $input_todo = $request['todo'];
-    $input_todo += ['user_id' => $request->user()->id];
-    $post->fill($input_post)->save();
-    return redirect('/todos/' . $todo->id);
-}
+    public function edit($id)
+    {
+        $todo = Todo::find($id);
+        return view('todos.edit', compact('todo'));
+    }
+    
+    public function update(Request $request, $id)
+    {
+        if ($request->status === null) {
+            
+            $todo = Todo::find($id);
+            $input_todo = $request->input('todo');
+            $todo->fill($input_todo)->save();
+            
+        }else{
+            
+            $todo = Todo::find($id);
+            $todo->status = true;
+            $todo->save();
+            
+        }
+        /*$input = $request['todo'];
+        $input += ['user_id' => $request->user()->id];*/
+        return redirect('/todos/');
+    }
+    
+    public function destroy(Todo $todo)
+    {
+        $todo->delete();
+        return redirect('/todos');
+    }
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 }
