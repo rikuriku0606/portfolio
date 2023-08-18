@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('to_do_suggestions')->nullable();
             $table->string('title');
             $table->string('body');
+            $table->boolean('status')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
