@@ -45,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
     Route::put('/todos/{todo}/update', [TodoController::class, 'update']);
     Route::delete('/todos/{todo}', [TodoController::class, 'destroy']);
+    
+    // Todoの投稿関連ルート
+    Route::get('/articles/index', [ArticleController::class, 'index'])->name('todo_posting_page');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 });
 
 Route::get('/todos/create', [TodoController::class, 'create']);

@@ -43,6 +43,7 @@
                         @foreach ($todos as $item)
                             <tr>
                                   <tr>
+                                    <tr>
                                       <td class="px-3 text-gray-500">
                                           <div>
                                               {{ $item->title }}
@@ -73,6 +74,12 @@
                                                       <button type="submit"class="py-4 w-20 md:hover:bg-slate-200 transition-colors">削除</button>
                                                   </form>
                                               </div>
+                                              
+                                              <form　action="/todos/{{ $item->id }}" method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <a href="{{ route('todo_posting_page', $item->id) }}"><buttom type="submit">投稿</buttom></a>
+                                              </form>
                                           </div>
                                       </td>
                                   </tr>
@@ -83,11 +90,7 @@
               </div>
           </div>
         @endif
-        <form　action=/articles method="post">
-            @csrf
-            @method('PUT')
-            <buttom type="submit">投稿</buttom>
-        </form>
+        
     </x-app-layout>
     </body>
 </html>
