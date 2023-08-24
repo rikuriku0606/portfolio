@@ -9,13 +9,18 @@ class Tag_article extends Model
 {
     use HasFactory;
     
-    public function tag_id()   
+    protected $fillable = [
+        'tag_id',
+        'article_id',
+    ];
+    
+    public function tags()   
     {
-        return $this->belongTo(Tag::class);  
+        return $this->belongsTo(Tag::class);  
     }
     
     public function article()   
     {
-        return $this->belongTo(Article::class);  
+        return $this->belongsTo(Article::class);  
     }
 }

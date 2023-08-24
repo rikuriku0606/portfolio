@@ -11,6 +11,7 @@
   </head>
   
   <body class="flex flex-col min-h-[100vh]">
+    <x-app-layout>
       <header class="bg-slate-800">
           <div class="max-w-7xl mx-auto px-4 sm:px-6">
               <div class="py-6">
@@ -42,5 +43,6 @@
               </div>
           </div>
       </main>
+    </x-app-layout>  
   </body>
   </html>

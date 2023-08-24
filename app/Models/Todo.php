@@ -21,16 +21,24 @@ class Todo extends Model
     
     public function user()
     {
-        //return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
+    
+    
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+    
     
     public function article()   
     {
         return $this->hasOne(Article::class);  
     }
-    
-    public function tag_todos()   
+    /*
+    public function tag_todo()   
     {
         return $this->hasMany(Tag_todo::class);
     }
+    */
 }

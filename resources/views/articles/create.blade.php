@@ -11,6 +11,7 @@
     <header>
         <div class="py-6">
             <p class="text-black text-xl">記事投稿</p>
+            
         </div>
     </header>
     
@@ -24,6 +25,7 @@
             @endforeach
     </div>
     @endif
+    <a href="{{ route('index_todo', $item->id) }}"><buttom type="submit">戻る</buttom></a>
 </x-app-layout>
 </body>
 </html>

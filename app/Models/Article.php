@@ -19,6 +19,11 @@ class Article extends Model
         return $this->belongsTo(Todo::class);  
     }
     
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+    
     public function tag_id()   
     {
         return $this->belongsTo(Tag::class);  
