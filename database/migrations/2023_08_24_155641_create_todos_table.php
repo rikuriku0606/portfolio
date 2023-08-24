@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id()->nullable();
+            $table->id();
             $table->timestamp('time_limit');
             $table->string('to_do_suggestions')->nullable();
             $table->string('title');

@@ -9,13 +9,30 @@ class Tag extends Model
 {
     use HasFactory;
     
-    public function tag_todos()   
+    protected $fillable = [
+        'name',
+    ];
+    
+    
+    public function todos()
     {
-        return $this->hasMany(Tag_todo::class);  
+        return $this->belongsToMany(Todo::class);
+    }
+    
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class);
+    }
+    /*
+    public function tag_todo()   
+    {
+        //return $this->belongsTo(Tag_todo::class);
+        return $this->hasMany(Tag_todo::class);
     }
     
     public function tag_articles()   
     {
-        return $this->hasMany(Tag_article::class);  
+        return $this->hasMany(Tag_article::class);   
     }
+    */
 }

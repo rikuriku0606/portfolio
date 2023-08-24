@@ -48,20 +48,14 @@ Route::middleware(['auth'])->group(function () {
     
     // Todoの投稿関連ルート
     Route::get('/articles/index', [ArticleController::class, 'index'])->name('todo_posting_page');
-    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+
+    //タグの表示
+    //Route::get('/todos/{tag}', [TodoController::class, 'index'])
+    //Route::get('/tags/index', [TagController::class, 'index'])->name('tagging_page');
+    Route::get('/tags/{tag}/edit', [TagController::class, 'edit']);
+    Route::get('/tags/create', [TagController::class, 'create']);
+    Route::post('/tags', [TagController::class, 'store']);
 });
 
 Route::get('/todos/create', [TodoController::class, 'create']);
 Route::get('/todos/{todo}', [TodoController::class, 'show'])->name('show_todo');
-/*Route::get('/todos', [TodoController::class, 'index'])->name('index_todo');
-Route::post('/todos/{todo}', [TodoController::class, 'store']);
-Route::get('/todos/{todo}', [TodoController::class, 'show'])->name('show_todo');
-Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
-Route::put('/todos/{todos}', [TodoController::class, 'update']);
-Route::delete('/todos/{todo}', [TodoController::class, 'destroy']);*/
-
-//Route::get('/todos/{todo}/edit', 'TodoController@edit')->name('todos.edit');
-//Route::get('/articles', [ArticleController::class, 'index']);
-//Route::get('/tags', [TagController::class, 'index']);
-//Route::get('/comments', [CommentController::class, 'index']); 
-//Route::get('/likes', [LikeController::class, 'index']);

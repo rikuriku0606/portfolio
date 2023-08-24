@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tag_todo', function (Blueprint $table) {
-            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
+        Schema::create('article_tag', function (Blueprint $table) {
+            $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
+            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
+            $table->primary(['tag_id','article_id']);  
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tag_todo', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('article_tag');
     }
 };
