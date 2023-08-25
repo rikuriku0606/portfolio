@@ -11,7 +11,32 @@ class TagController extends Controller
 {
      public function index()
     {
-        //Tagモデルからデータを取得する
+            //Tagモデルからデータを取得する
+            /*$items = Tag::('name'); // 例: Item モデルからデータを取得
+            $average = $items->avg('name');
+            
+            return view('tags.', [
+            'items' => $items,
+            'average' => $average,
+        ]);
+        
+        return view('tags.tag_serch');*/
+        
+        $tag_name = $request->input('tag_name');
+        
+        /*$query = \App\Tag::query();
+    
+        if(!empty($tag_name))
+        {
+            $query->Where('name','like','%'.$tag_name.'%');
+        }
+        return view('tags.tag_search')->with('tag_name',$tag_name);*/
+        $tag_search_result = Tag::where('name','%'.$tag_name.'%')
+            ->with('todos')->get();
+    
+         return view('tags.tag_search', [
+            'tag_search_result' => $tag_search_result,
+        ]);
     }
     
     public function create()
@@ -49,5 +74,24 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         // 特定のTodoを削除する
+    }
+    
+    
+    public function searchTag(Request $request)
+    {
+        $tag_name = $request->input('tag_name');
+        
+        /*$query = \App\Tag::query();
+        if(!empty($tag_name))
+        {
+            $query->Where('name','like','%'.$tag_name.'%');
+        }
+        return view('tags.tag_search')->with('tag_name',$tag_name);*/
+        
+        $tag_search_result = Tag::where('name','like','%'.$tag_name.'%')
+            ->with('todos')->get();
+         return view('tags.tag_search', [
+            'tag_search_result' => $tag_search_result,
+        ]);
     }
 }

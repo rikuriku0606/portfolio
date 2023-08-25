@@ -14,6 +14,7 @@ class Todo extends Model
     
     protected $fillable = [
         'user_id',
+        'time_limit',
         'to_do_suggestions',
         'title',
         'body',
@@ -35,10 +36,4 @@ class Todo extends Model
     {
         return $this->hasOne(Article::class);  
     }
-    /*
-    public function tag_todo()   
-    {
-        return $this->hasMany(Tag_todo::class);
-    }
-    */
 }

@@ -51,10 +51,11 @@ Route::middleware(['auth'])->group(function () {
 
     //タグの表示
     //Route::get('/todos/{tag}', [TodoController::class, 'index'])
-    //Route::get('/tags/index', [TagController::class, 'index'])->name('tagging_page');
+    Route::get('/tags/search', [TagController::class, 'searchTag'])->name('tag_search_page');
     Route::get('/tags/{tag}/edit', [TagController::class, 'edit']);
     Route::get('/tags/create', [TagController::class, 'create']);
     Route::post('/tags', [TagController::class, 'store']);
+    Route::get('/articles/create/{id}', [ArticleController::class, 'create'])->name('article.create');
 });
 
 Route::get('/todos/create', [TodoController::class, 'create']);
