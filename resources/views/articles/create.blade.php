@@ -15,17 +15,24 @@
         </div>
     </header>
     
-    @if ($todos->isNotEmpty())
     <div class="min-w-full divide-y">
-        @foreach ($todos as $item)
-                <div class='todo'>
-                    <h2 class='title'>{{ $item->title }}</h2>
-                    <p class='body'>{{ $item->body }}</p>
-                    <br>
-            @endforeach
-    </div>
-    @endif
-    <a href="{{ route('index_todo', $item->id) }}"><buttom type="submit">戻る</buttom></a>
+    <form action="" method="post" class="mt-10">
+          @csrf
+          @method('PUT')
+          <div class="flex flex-col items-center">
+              <label class="w-full max-w-3xl mx-auto">
+                  <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"type="text" name="todo[title]" value="{{ $todo->title }}" />
+                  <textarea class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"type="text" name="todo[body]" value="{{ $todo->body }}" ></textarea>
+                  <textarea class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"type="text" name="tag[name]" value="{{ $tag->name }}" ></textarea>
+              </label>
+
+              <div class="mt-8 w-full flex items-center justify-center gap-10">
+                  <a href="/todos" class="block shrink-0 underline underline-offset-2">戻る</a>
+                  <button type="submit">編集を保存</button>
+              </div>
+          </div>
+    </form>
+    <a href="{{ route('index_todo', $article->id) }}"><buttom type="submit">戻る</buttom></a>
 </x-app-layout>
 </body>
 </html>

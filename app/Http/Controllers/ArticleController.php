@@ -11,13 +11,15 @@ class ArticleController extends Controller
     public function index(Article $article)
     {
         // 一覧を表示する
-        $todos = Todo::all(); // 例として Todo モデルからデータを取得する
-        return view('articles.create')->with('todos', $todos);
+        $articles = Article::all(); // 例として Todo モデルからデータを取得する
+        return view('articles.create')->with('articles', $articles);
     }
 
-    public function create()
+    public function create($id)
     {
         // 新しいTodoを作成するフォームを表示する
+        $todo=Todo::find($id);
+        return view('articles.create', compact('todo'));
     }
     
     public function store(Request $request, Article $article)

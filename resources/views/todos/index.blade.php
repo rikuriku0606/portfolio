@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <title>Todo</title>
-        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     
@@ -22,46 +21,43 @@
             @method('POST')
             <div><input type="text" name="todo[title]" placeholder="タイトル"/></div>
             <div><textarea type="text" name="todo[body]" placeholder="Todoを入力"></textarea></div>
+            <div><input type="datetime-local" name="todo[time_limit]" placeholder="いつまで？"/></div>
                 <div class="edit">
                         @foreach($tags as $tag)
                             <input type="checkbox" name="tags[]" value='{{ $tag->id }}'/>
                             <lavel>{{ $tag->name }}</lavel>
                         @endforeach
                     </select>
-                    {{--@foreach($tags as $tag)--}}
+                    <br>
                     <a href="/tags/create">新たにタグを作成する</a>
-                    {{--@endforeach--}}
-                    {{--
-                    <a href="/tags/{{$tag->id}}/edit/">新たにタグを作成する</a>
-                    
-                    <datalist id="Tag_list">
-                        <option value="a">
-                    </datalist>
-                    --}}
-                    
                 </div>
+                
+                
+                
             <input type="submit" value="作成"/>
         </form>
         
-        </div>
+        <form action="/tags/search" method="GET">
+            @csrf
+            <!--<input type="text" name="tag_name" value=  "$tag->name"  placeholder="タグ名で検索">-->
+            <input type="text" name="tag_name" placeholder="タグ名で検索">
+            <!--<input type="submit" value="検索"/>-->
+            <button type="submit">検索</button>
+        </form>
         
+        </div>
         @if ($todos->isNotEmpty())
-          <div class="max-w-7xl mx-auto mt-20">
+          <div>
               <div class="inline-block min-w-full py-2 align-middle">
-                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                     <table class="min-w-full divide-gray-300">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                                タスク</th>
-                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                <span class="sr-only">Actions</span>
-                            </th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Todoリスト</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
-                        @foreach ($todos as $todo)
                         
+                        @foreach ($todos as $todo)
                             <tr>
                                   <tr>
                                     <tr>
@@ -75,29 +71,16 @@
                                             {{$todo->body}}
                                           </div>
                                       </td>
+                                      <td class="px-3 text-gray-500">
+                                          <div>
+                                            {{$todo->time_limit}}
+                                          </div>
+                                      </td>
                                       <td>
                                           <div class="px-3 text-gray-500">
-                                            
                                             @foreach($todo->tags as $tag)
                                             {{ $tag->name }}
                                             @endforeach
-                                            {{--
-                                            {{$tag->name}}
-                                            
-                                            
-                                            
-                                            @foreach ($tag as $itemTag)
-                                                {{ $itemTag->name }}
-                                            @endforeach
-                                            
-                                            @if ($todo->tags->isNotEmpty())
-                                                @foreach ($todo->tags as $tag)
-                                                    {{ $tag->name }}
-                                                @endforeach
-                                            @else
-                                                No Tag
-                                            @endif
-                                            --}}
                                           </div>
                                           
                                           <td>
@@ -121,12 +104,9 @@
                                                       <button type="submit"class="py-4 w-20 md:hover:bg-slate-200 transition-colors">削除</button>
                                                   </form>
                                               </div>
-                                              
-                                              <form　action="/todos/{{ $todo->id }}" method="post">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <buttom type="submit"><a href="{{ route('todo_posting_page', $todo->id) }}">投稿</a></buttom>
-                                              </form>
+
+                                              <buttom type="submit"><a href="{{ route('article.create', $todo->id) }}">投稿</a></buttom>
+        
                                           </div>
                                       </td>
                                   </tr>
