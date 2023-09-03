@@ -3,38 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\Todo;
+use App\Models\Tag;
 
 class ArticleController extends Controller
 {
-    public function index(Article $article)
+    public function index()
     {
         // 一覧を表示する
-        $articles = Article::all(); // 例として Todo モデルからデータを取得する
-        return view('articles.create')->with('articles', $articles);
+        $articles=Article::latest()->get();
+        return view('articles.post', compact('articles'));
     }
 
     public function create($id)
     {
-        // 新しいTodoを作成するフォームを表示する
+        // 作成するフォームを表示する
         $todo=Todo::find($id);
         return view('articles.create', compact('todo'));
     }
     
-    public function store(Request $request, Article $article)
+    public function store(Request $request)
     {
-        // 新しいTodoをデータベースに保存する
+        // データベースに保存する
+        $todo = $request['todo'];
+        $todo['user_id'] = Auth::id();
+        $tag_ids = $request->input('tag.id');
+        // 新しいTodoとタグを作成してデータベースに保存
+        $articles = Article::create($todo);
+        
+        // Todoとタグの関連付け
+        foreach($tag_ids as $tag_id){
+            $articles->tags()->attach($tag_id);
+        }
+        return redirect()->route('article.index');
     }
     
     public function show(Article $article)
     {
-        // 特定のTodoの詳細を表示する
+        // 詳細を表示する
     }
     
     public function edit($id)
     {
-        // 特定のTodoの編集フォームを表示する
+        // 編集フォームを表示する
     }
     
     public function update(Request $request, $id)
@@ -46,4 +59,5 @@ class ArticleController extends Controller
     {
         // 特定のTodoを削除する
     }
+    
 }
