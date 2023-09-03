@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use App\Models\Tag;
-use App\Models\Tag_todo;
 
 class TodoController extends Controller
 {

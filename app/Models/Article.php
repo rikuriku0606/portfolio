@@ -4,10 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Article extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'user_id',
+        'todo_id',
+        'tag_id',
+        'title',
+        'body',
+        'name',
+    ];
     
     public function user()   
     {
@@ -24,7 +34,7 @@ class Article extends Model
         return $this->belongsToMany(Tag::class);
     }
     
-    public function tag_id()   
+    /*public function tag_id()   
     {
         return $this->belongsTo(Tag::class);  
     }
@@ -32,5 +42,5 @@ class Article extends Model
     public function tag_article()   
     {
         return $this->hasMany(tag_article::class);  
-    }
+    }*/
 }

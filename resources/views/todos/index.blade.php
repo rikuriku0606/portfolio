@@ -46,6 +46,7 @@
         </form>
         
         </div>
+        
         @if ($todos->isNotEmpty())
           <div>
               <div class="inline-block min-w-full py-2 align-middle">
@@ -118,7 +119,7 @@
               </div>
           </div>
         @endif
-
+    
     </x-app-layout>
     </body>
 </html>

@@ -5,32 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tag;
 use App\Models\Todo;
-use App\Models\Tag_todo;
 
 class TagController extends Controller
 {
      public function index()
     {
-            //Tagモデルからデータを取得する
-            /*$items = Tag::('name'); // 例: Item モデルからデータを取得
-            $average = $items->avg('name');
-            
-            return view('tags.', [
-            'items' => $items,
-            'average' => $average,
-        ]);
-        
-        return view('tags.tag_serch');*/
-        
         $tag_name = $request->input('tag_name');
-        
-        /*$query = \App\Tag::query();
-    
-        if(!empty($tag_name))
-        {
-            $query->Where('name','like','%'.$tag_name.'%');
-        }
-        return view('tags.tag_search')->with('tag_name',$tag_name);*/
+
         $tag_search_result = Tag::where('name','%'.$tag_name.'%')
             ->with('todos')->get();
     
